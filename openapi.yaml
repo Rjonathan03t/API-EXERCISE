@@ -107,7 +107,7 @@ paths:
     delete:
       tags:
         - students
-      summary: Update student
+      summary: delete student
       description: delete a student.
       operationId: deleteStudent
       parameters:
@@ -223,7 +223,7 @@ paths:
     delete:
       tags:
         - teachers
-      summary: Update teacher
+      summary: delete teacher
       description: delete a teacher.
       operationId: deleteTeacher
       parameters:
