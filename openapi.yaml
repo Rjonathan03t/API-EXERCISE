@@ -1,20 +1,14 @@
 openapi: 3.0.3
 info:
-  title: Swagger student - OpenAPI 3.0
-  termsOfService: http://swagger.io/terms/
-  contact:
-    email: apiteam@swagger.io
-  license:
-    name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: Onboarding API
   version: 1.0.11
 externalDocs:
   url: http://swagger.io
 servers:
   - url: https://student.swagger.io/api/v3
 tags:
-  - name: student 
-    description: Get and post about student 
+  - name: Student 
+    description: Get,post,put and delete about StudentAPI 
 paths:
   /student/{student}:        
     get:
@@ -26,7 +20,6 @@ paths:
       parameters:
         - name: student
           in: path
-          description: 'The name that needs to be fetched. Use user1 for testing. '
           required: true
           schema:
             type: string
@@ -50,6 +43,12 @@ paths:
       summary: Creates list of students with given input array
       description: Creates list of students with given input array
       operationId: createStudent
+      parameters:
+        - name: student
+          in: path
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -68,7 +67,66 @@ paths:
               schema:
                 $ref: '#/components/schemas/Student'
         default:
-          description: successful operation      
+          description: successful operation   
+    put:
+      tags:
+        - student
+      summary: Update student
+      description: Updates a student.
+      operationId: updateStudent
+      parameters:
+        - name: student
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Student'
+      responses:
+        '200':
+          description: Update successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Student'
+        '400':
+          description: Bad request
+        '500':
+          description: Internal server error     
+    delete:
+      tags:
+        - student
+      summary: Update student
+      description: delete a student.
+      operationId: deleteStudent
+      parameters:
+        - name: student
+          in: path
+          description: 'The name that needs to be fetched. Use user1 for testing. '
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: delete successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Student'
+        '400':
+          description: Bad request
+        '500':
+          description: Internal server error 
 components:
   schemas:
     Student :
